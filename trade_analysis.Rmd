@@ -1,0 +1,2139 @@
+---
+title: "Exportações, Crises e Desigualdade: Como o Comércio Afeta o Desenvolvimento na UE?"
+subtitle: "Team 5"
+author: "Diana Borges, João Duarte, Maria Eduarda Ferreira, Rafael Ferreira"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+theme: Warsaw
+header-includes:
+- \usepackage{hyperref}
+- \hypersetup{ colorlinks=true, linkcolor=red, urlcolor=blue, }
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+#### Introdução
+
+Num contexto de crescente globalização, o comércio internacional tem
+desempenhado um papel central no crescimento e desenvolvimento
+económico, influenciando tanto o dinamismo das economias como a
+distribuição da riqueza e a redução da pobreza. Contudo, períodos de
+crise, como a crise do euro ou a pandemia de COVID-19 podem interromper
+esse processo, afetando significativamente as exportações e,
+consequentemente, o desempenho económico e social dos países. A
+literatura tem mostrado que choques económicos tendem a afetar de forma
+desproporcional os grupos mais vulneráveis, agravando desigualdades e
+dificultando a mobilidade social.
+
+Este estudo propõe-se analisar, com base em dados do World Bank para o
+período de 2010 a 2023, como as exportações afetam o desenvolvimento
+económico e social nos países da União Europeia, utilizando indicadores
+como o crescimento anual das exportações de bens e serviços, o
+crescimento do PIB, o índice de Gini e a taxa de pobreza internacional.
+Pretende-se investigar de que forma o comércio internacional contribui
+para o crescimento económico, a redução da pobreza e da desigualdade, e
+como estes efeitos podem ser condicionados por períodos de crise,
+recorrendo a métodos de análise de dados em painel. Os resultados
+poderão fornecer subsídios relevantes para a formulação de políticas
+económicas e sociais na União Europeia.
+
+#### Revisão Literária
+
+A relação entre comércio internacional, crescimento económico,
+desigualdade e pobreza tem sido amplamente debatida na literatura
+económica, com resultados que dependem do contexto analisado e das
+metodologias utilizadas. Frankel e Romer (1999) demonstram, através de
+uma análise empírica, que a abertura ao comércio internacional está
+positivamente associada ao crescimento do PIB per capita, sugerindo que
+países mais abertos tendem a apresentar níveis de rendimento mais
+elevados. No contexto europeu, Crespo-Cuaresma, Fidrmuc e Martin (2008)
+analisaram o impacto do aumento das exportações e da integração
+comercial na União Europeia, especialmente após a adesão dos países da
+Europa Central e de Leste, concluindo que o crescimento das exportações
+contribuiu de forma significativa para o dinamismo económico destes
+países.
+
+No entanto, apesar dos benefícios do comércio internacional para o
+crescimento, o seu impacto sobre a desigualdade e a pobreza revela-se
+mais ambíguo. Helpman, Itskhoki e Redding (2010) mostram que, em
+economias desenvolvidas, a abertura comercial pode aumentar a
+desigualdade de rendimentos, sobretudo devido à maior valorização do
+trabalho qualificado em detrimento do não qualificado. Esta conclusão
+está em linha com a teoria de Stolper-Samuelson, que prevê que o
+comércio beneficia os fatores de produção mais abundantes, podendo assim
+acentuar disparidades internas. No que diz respeito à pobreza, Dollar e
+Kraay (2004) argumentam que o comércio internacional pode contribuir
+para a sua redução, mas salientam que este efeito depende fortemente da
+qualidade das instituições e das políticas nacionais. Winters, McCulloch
+e McKay (2004) reforçam que a liberalização comercial pode beneficiar os
+mais pobres, mas apenas quando acompanhada de políticas sociais e de
+inclusão adequadas.
+
+Os efeitos de períodos de crise económica, como a crise financeira de
+2008 ou a pandemia de COVID-19, têm sido analisados por diversos
+autores. Baldwin e Tomiura (2020) destacam que choques externos afetam
+de forma acentuada as exportações e, consequentemente, o crescimento
+económico, sendo os grupos socialmente mais vulneráveis os mais
+afetados, o que tende a agravar a desigualdade e a dificultar a
+mobilidade social. Berthou et al. (2022) reforçam que a integração
+comercial e a participação em cadeias de valor globais tornam as
+economias europeias mais expostas a choques externos, com impactos
+diferenciados consoante a estrutura produtiva de cada país.
+
+No contexto específico da União Europeia, a Comissão Europeia (2023)
+sublinha que a política comercial desempenha um papel fundamental na
+redução da desigualdade, mas os seus efeitos dependem da articulação com
+outras políticas públicas, como educação, formação e proteção social.
+Estudos recentes indicam que, embora o comércio externo tenha
+contribuído para o crescimento económico, os benefícios não têm sido
+distribuídos de forma uniforme entre os Estados-membros, sendo os países
+do sul e do leste europeu mais vulneráveis a choques externos e a
+aumentos da desigualdade.
+
+Apesar dos avanços da literatura, são ainda escassos os estudos que
+analisam de forma integrada o impacto das exportações sobre o
+crescimento, a desigualdade e a pobreza em contexto de crise na União
+Europeia, especialmente com dados recentes e comparáveis entre países. O
+presente trabalho pretende contribuir para preencher esta lacuna,
+analisando empiricamente a relação entre comércio externo,
+desenvolvimento económico e social na União Europeia entre 2010 e 2023,
+com especial atenção aos períodos de crise.
+
+#### Dados
+
+A análise utiliza dados do Banco Mundial, abrangendo indicadores
+macroeconómicos essenciais para avaliar a relação entre comércio,
+crescimento económico e desigualdade. Os conjuntos de dados incluem
+informações sobre o crescimento do PIB (% anual), o índice de Gini (como
+medida de desigualdade de renda), o crescimento das exportações de bens
+e serviços (% anual) e a taxa de pobreza medida pela linha de \$2,15 por
+dia (2017 PPP).
+
+Esses indicadores fornecem uma base sólida para explorar de que forma o
+comércio internacional influencia o desenvolvimento económico e a
+distribuição de renda. A escolha dessas variáveis permite a
+implementação de modelos de regressão econométrica e a realização de
+testes para identificar possíveis quebras estruturais, especialmente em
+períodos de crise. A organização dos dados e a análise das suas
+estatísticas descritivas asseguram que o conjunto é apropriado para
+responder aos objetivos de pesquisa delineados neste estudo.
+
+```{r Interpretação de dados}
+
+
+# Carregar pacotes
+library(dplyr)
+library(readr)
+library(summarytools)
+library(tidyverse)
+library(psych)
+library(GGally)
+library(corrplot)
+library(ggplot2)
+
+
+dados <- read_csv("/Users/eduardaferreira/Desktop/dataset_completo.csv")
+
+# tipos de variáveis
+dados <- dados %>%
+  mutate(
+    Year = as.integer(Year),
+    `Country Name` = as.factor(`Country Name`)
+  )
+
+# Estrutura e sumário dos dados
+str(dados)
+summary(dados)
+dfSummary(dados)
+
+# Estatísticas descritivas globais para variáveis numéricas
+describe(select(dados, where(is.numeric)))
+
+# Estatísticas descritivas por país
+dados %>%
+  group_by(`Country Name`) %>%
+  summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)), .groups = "drop")
+
+
+```
+
+**Exportations** A variável **Exportations** mede o crescimento anual
+das exportações de bens e serviços nos países da União Europeia,
+apresenta uma média de aproximadamente 5,3 e um desvio padrão de 4,5,
+com valores que oscilam entre um mínimo de cerca de -6,4 e um máximo de
+16,6. A mediana situa-se em torno de 3,0 e o intervalo interquartil
+(IQR) é de 6,2, indicando que a maioria dos valores se concentra em
+níveis moderados, embora existam oscilações significativas entre países
+e anos.
+
+Os valores negativos observados refletem períodos de recessão ou choques
+económicos, como a crise do euro ou a pandemia de COVID-19, enquanto os
+valores mais elevados correspondem a fases de recuperação. A dispersão
+elevada sugere diferenças estruturais relevantes entre as economias
+analisadas e a presença de outliers, frequentemente associados a anos de
+crise. Existem cerca de 7,7% de valores ausentes nesta variável, o que
+deve ser considerado na análise subsequente.
+
+**Gini_index** O **índice de Gini**, que avalia a desigualdade de
+rendimento, apresenta uma média de 31,8 e um desvio padrão de 3,5,
+variando entre 24,0 e 41,3. A mediana é de 31,7 e o IQR de 5,7, o que
+revela que a maioria dos países se situa próxima da média, mas ainda
+assim existem discrepâncias importantes na distribuição de rendimento.
+Esta amplitude de variação reflete diferenças estruturais entre os
+países da União Europeia, com alguns a registarem níveis de desigualdade
+significativamente mais elevados do que outros. Cerca de 14,9% dos
+valores estão ausentes, sendo importante analisar se estes missing
+values se concentram em determinados países ou períodos.
+
+**GDP_growth**\
+A variável **GDP_growth**, que mede a taxa de crescimento anual do PIB,
+apresenta uma média de 2,3 e um desvio padrão de 2,6, com valores que
+oscilam entre -4,1 e 8,7. A mediana é de 1,8 e o IQR de 3,3, indicando
+que a maioria dos países regista taxas de crescimento moderadas, mas há
+uma dispersão considerável, sobretudo em anos de crise ou de forte
+expansão económica. Esta variabilidade é fundamental para analisar a
+relação entre crescimento económico, exportações e desigualdade. Existem
+cerca de 6,9% de valores ausentes nesta variável.
+
+**Poverty (% of population)**\
+A **taxa de pobreza**, expressa como percentagem da população, tem uma
+média de 0,40 e um desvio padrão de 0,40, variando entre 0,0 e 1,5. A
+mediana é de 0,3 e o IQR de 0,6, o que mostra que a maioria dos países
+apresenta níveis baixos de pobreza, mas há diferenças relevantes entre
+eles. É importante confirmar se os valores estão em proporção (por
+exemplo, 0,4 corresponde a 40%) ou se já representam percentagens reais.
+Esta variável apresenta a maior proporção de valores ausentes (cerca de
+20,9%), o que pode limitar algumas análises e exige cuidado na abordagem
+estatística.
+
+**Year**\
+A variável **Year** cobre o período de 2010 a 2023, com uma distribuição
+equilibrada entre os anos para a maioria dos países. Esta estrutura
+temporal permite analisar tendências, identificar choques económicos e
+explorar possíveis quebras estruturais ao longo do tempo.
+
+**Country Name**\
+O dataset inclui 25 países da União Europeia, com cerca de 14
+observações por país, formando um painel de dados quase balanceado. Esta
+configuração é ideal para análises comparativas entre países e para a
+aplicação de modelos de dados em painel, permitindo captar tanto a
+variação entre países como ao longo do tempo.
+
+------------------------------------------------------------------------
+
+**Em resumo**, as variáveis analisadas apresentam boa variabilidade e
+cobertura temporal, com algumas lacunas a nível de dados ausentes,
+especialmente nas variáveis sociais. Os dados são adequados para
+explorar as relações entre exportações, crescimento económico,
+desigualdade e pobreza, e para investigar o impacto de choques
+económicos em diferentes contextos nacionais.
+
+```{r Gráficos}
+# Boxplots para detecção de outliers por variável numérica
+dados %>%
+  pivot_longer(cols = c(Exportacions, Gini_index, GDP_growth, `Poverty(% of population)`),
+               names_to = "Variavel", values_to = "Valor") %>%
+  ggplot(aes(x = Variavel, y = Valor, fill = Variavel)) +
+  geom_boxplot() +
+  theme_minimal() +
+  coord_flip() +
+  labs(title = "Boxplot - Outliers das Variáveis")
+
+#  Histogramas para cada variável numérica
+dados %>%
+  pivot_longer(cols = c(Exportacions, Gini_index, GDP_growth, `Poverty(% of population)`),
+               names_to = "Variavel", values_to = "Valor") %>%
+  ggplot(aes(x = Valor)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  facet_wrap(~Variavel, scales = "free") +
+  theme_minimal() +
+  labs(title = "Distribuição das Variáveis Numéricas")
+
+# Evolução temporal das variáveis por país
+dados %>%
+  pivot_longer(cols = c(Exportacions, Gini_index, GDP_growth, `Poverty(% of population)`),
+               names_to = "Variavel", values_to = "Valor") %>%
+  ggplot(aes(x = Year, y = Valor, color = Variavel)) +
+  geom_line() +
+  facet_wrap(~`Country Name`) +
+  theme_minimal() +
+  labs(title = "Evolução das Variáveis ao Longo do Tempo por País")
+
+# Matriz de correlação (apenas variáveis numéricas, removendo NAs)
+dados_num <- dados %>% select(Exportacions, Gini_index, GDP_growth, `Poverty(% of population)`)
+cor_matrix <- cor(na.omit(dados_num))
+corrplot(cor_matrix, method = "color", type = "upper", tl.col = "black")
+
+#  Matriz de dispersão entre variáveis principais
+ggpairs(na.omit(dados_num))
+
+#  Gráfico temporal para um país específico (exemplo: Austria)
+dados %>%
+  filter(`Country Name` == "Austria") %>%
+  pivot_longer(cols = c(Exportacions, Gini_index, GDP_growth, `Poverty(% of population)`),
+               names_to = "Variavel", values_to = "Valor") %>%
+  ggplot(aes(x = Year, y = Valor, color = Variavel)) +
+  geom_line() +
+  theme_minimal() +
+  labs(title = "Evolução das Variáveis - Austria")
+
+```
+
+A análise gráfica das principais variáveis do estudo permitiu
+identificar padrões relevantes e apoiar as interpretações estatísticas
+realizadas anteriormente.
+
+No **Gráfico 1 (Boxplot – Outliers das Variáveis)**, observa-se que a
+variável **Exportations** apresenta uma grande dispersão, com diversos
+outliers tanto em valores negativos (associados a anos de recessão) como
+em valores muito elevados, acima de 15%, típicos de períodos de
+crescimento excecional. O crescimento do **PIB (GDP_growth)** mostra a
+maioria dos valores concentrados entre 0% e 5%, mas também revela a
+presença de outliers negativos, correspondentes a anos de crise, e
+positivos, associados a recuperações económicas mais fortes. Já o índice
+de **Gini (Gini_index)** apresenta uma distribuição mais compacta, sem
+outliers extremos, o que sugere uma certa estabilidade da desigualdade
+ao longo do tempo nos países analisados. Por sua vez, a **taxa de
+pobreza (% population)** evidencia uma assimetria mais acentuada e
+outliers na cauda direita, indicando que alguns países registam níveis
+de pobreza significativamente mais elevados do que a média europeia.
+
+Estes resultados confirmam a presença de valores extremos, sobretudo nas
+exportações e na pobreza, que devem ser considerados na modelação
+econométrica, por exemplo, através do uso de regressões robustas ou
+técnicas de winsorização.
+
+O **Gráfico 2 (Histogramas – Distribuição das Variáveis Numéricas)** permite visualizar a distribuição de frequência de cada
+variável. As **exportações** apresentam uma distribuição aproximadamente
+normal, mas com ligeira assimetria à direita, sendo que muitos países
+registam taxas de crescimento entre 5% e 10%. O crescimento do **PIB**
+também segue uma distribuição quase normal, centrada em torno de 2%, mas
+com uma cauda à esquerda, refletindo anos de crise económica. O **índice
+de Gini** revela uma distribuição bimodal, sugerindo a existência de
+dois grupos distintos de países: uns com menor e outros com maior
+desigualdade de rendimento. A **taxa de pobreza**, por sua vez,
+apresenta uma distribuição fortemente assimétrica, com a maioria dos
+países abaixo de 0,6, mas com valores que atingem 1,5.
+
+Estas distribuições assimétricas e bimodais sugerem que pode ser
+necessário aplicar transformações às variáveis (como logaritmos ou
+criação de dummies para alta pobreza) para garantir a validade dos
+modelos econométricos.
+
+A evolução temporal das variáveis, apresentada no **Gráfico 3 (Evolução
+das Variáveis ao Longo do Tempo por País)**, evidencia tendências e
+choques relevantes. As **exportações** mostram uma tendência crescente
+até 2019, seguida de um recuo acentuado em 2020, ano marcado pelo
+impacto da pandemia de COVID-19 em vários países. O crescimento do
+**PIB** revela oscilações mais acentuadas, captando os ciclos económicos
+de recessão e recuperação. O **índice de Gini** mantém-se relativamente
+estável na maioria dos países, com pequenas oscilações, enquanto a taxa
+de pobreza apresenta variações mais irregulares e sensíveis a choques,
+como a crise do euro ou a pandemia.
+
+Estes resultados confirmam a importância de incluir efeitos temporais e
+dummies de crise nos modelos econométricos, de modo a captar variações
+estruturais ao longo do tempo.
+
+O **Gráfico 4 (Mapa de Calor – Correlações)** mostra a força e direção
+das relações lineares entre as variáveis principais, através da
+correlação de Pearson. Destaca-se a forte correlação positiva entre
+**exportações e crescimento do PIB** (\~0,62), bem como entre o **índice
+de Gini e a taxa de pobreza** (\~0,63).
+
+ Por outro lado, as relações entre **exportações e desigualdade**, ou
+entre **PIB e Gini**, são mais fracas, sugerindo que pode ser necessário
+explorar efeitos cruzados ou variáveis instrumentais para captar
+relações indiretas. Este mapa de calor justifica a hipótese de que
+exportações e PIB estão fortemente associados (hipótese de crescimento),
+enquanto Gini e pobreza estão intimamente ligados (hipótese de
+desigualdade).
+
+A **matriz de dispersão (Gráfico 5)** permite visualizar simultaneamente
+as correlações, dispersões e distribuições de densidade entre pares de
+variáveis. Observa-se um padrão linear positivo forte entre exportações
+e crescimento do PIB, bem como um alinhamento claro entre Gini e
+pobreza. Outros pares, como exportações versus Gini ou pobreza versus
+PIB, mostram relações mais dispersas, sem padrão visível.
+
+Esta matriz confirma que a **inclusão simultânea de Gini e pobreza no
+mesmo modelo pode levantar problemas de multicolinearidade**, devendo-se
+considerar modelos separados ou aplicar testes de VIF para garantir a
+robustez das estimativas.
+
+Por fim, o **Gráfico 6 (Evolução das Variáveis – Áustria)** apresenta um
+estudo de caso específico, ilustrando a evolução das quatro variáveis ao
+longo do tempo na Áustria. Observa-se que as exportações registam um
+crescimento quase constante, com uma queda acentuada em 2020. O
+crescimento do PIB acompanha ciclos regulares, com uma descida marcada
+no ano da pandemia. O índice de Gini mantém-se estável, enquanto a taxa
+de pobreza apresenta pequenas oscilações, com uma tendência de redução
+até 2020, seguida de um aumento.
+
+Este exemplo evidencia que, para países específicos, pode ser útil
+modelar a dinâmica com efeitos fixos ou incluir dummies para anos de
+crise.
+
+```{r Declive de Regressão PIB~Comércio}
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+dados <- read_csv("dataset_completo.csv")
+
+# Calcular o declive da regressão GDP_growth ~ Exportacions para cada ano
+df_slopes <- dados %>%
+  group_by(Year) %>%
+  summarise(
+    slope = {
+      temp <- dplyr::filter(cur_data(), !is.na(Exportacions) & !is.na(GDP_growth))
+      if (nrow(temp) > 1) {
+        coef(lm(GDP_growth ~ Exportacions, data = temp))[2]
+      } else {
+        NA_real_
+      }
+    }
+  ) %>%
+  na.omit()
+
+# Gráfico da evolução do declive ao longo dos anos
+ggplot(df_slopes, aes(x = Year, y = slope)) +
+  geom_line(color = "#1E90FF", linewidth = 1) +
+  geom_point(color = "#FFD700", size = 2) +
+  labs(
+    title = "Evolução do Impacto das Exportações no Crescimento do PIB",
+    x = "Ano",
+    y = "Declive da Regressão Linear (Exportações → PIB)"
+  ) +
+  scale_x_continuous(breaks = seq(min(df_slopes$Year), max(df_slopes$Year), by = 1)) +
+  theme_minimal()
+
+```
+
+```{r Declive de Regressão Gini~Exportações}
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+dados <- read_csv("dataset_completo.csv", show_col_types = FALSE)
+
+# Calcular o declive da regressão Gini_index ~ Exportacions para cada ano
+df_slopes_gini <- dados %>%
+  group_by(Year) %>%
+  summarise(
+    slope = {
+      temp <- dplyr::filter(cur_data(), !is.na(Exportacions) & !is.na(Gini_index))
+      if (nrow(temp) > 1) {
+        coef(lm(Gini_index ~ Exportacions, data = temp))[2]
+      } else {
+        NA_real_
+      }
+    }
+  ) %>%
+  na.omit()
+
+# Gráfico
+ggplot(df_slopes_gini, aes(x = Year, y = slope)) +
+  geom_line(color = "#E24A33", linewidth = 1) +
+  geom_point(color = "#348ABD", size = 2) +
+  labs(
+    title = "Evolução do Impacto das Exportações na Desigualdade (Gini)",
+    x = "Ano",
+    y = "Declive da Regressão Linear (Exportações → Gini)"
+  ) +
+  theme_minimal()
+
+```
+
+```{r Declive de Regressão Pobreza~Exportações}
+df_slopes_poverty <- dados %>%
+  group_by(Year) %>%
+  summarise(
+    slope = {
+      temp <- dplyr::filter(cur_data(), !is.na(Exportacions) & !is.na(`Poverty(% of population)`))
+      if (nrow(temp) > 1) {
+        coef(lm(`Poverty(% of population)` ~ Exportacions, data = temp))[2]
+      } else {
+        NA_real_
+      }
+    }
+  ) %>%
+  na.omit()
+
+# Gráfico
+ggplot(df_slopes_poverty, aes(x = Year, y = slope)) +
+  geom_line(color = "#7A68A6", linewidth = 1) +
+  geom_point(color = "#467821", size = 2) +
+  labs(
+    title = "Evolução do Impacto das Exportações na Pobreza",
+    x = "Ano",
+    y = "Declive da Regressão Linear (Exportações → Pobreza)"
+  ) +
+  theme_minimal()
+
+```
+
+```{r Declive de Regressão Pobreza~Gini}
+df_slopes_gini_poverty <- dados %>%
+  group_by(Year) %>%
+  summarise(
+    slope = {
+      temp <- dplyr::filter(cur_data(), !is.na(Gini_index) & !is.na(`Poverty(% of population)`))
+      if (nrow(temp) > 1) {
+        coef(lm(`Poverty(% of population)` ~ Gini_index, data = temp))[2]
+      } else {
+        NA_real_
+      }
+    }
+  ) %>%
+  na.omit()
+
+# Gráfico
+ggplot(df_slopes_gini_poverty, aes(x = Year, y = slope)) +
+  geom_line(color = "#FFB300", linewidth = 1) +
+  geom_point(color = "#B2001D", size = 2) +
+  labs(
+    title = "Evolução do Impacto da Desigualdade na Pobreza",
+    x = "Ano",
+    y = "Declive da Regressão Linear (Gini → Pobreza)"
+  ) +
+  theme_minimal()
+
+```
+
+Para além da análise descritiva global, foi estimado o **declive da regressão linear** entre pares de variáveis para cada ano entre 2010 e 2023, de forma a captar **a evolução temporal do impacto das exportações no desenvolvimento económico e social** dos países da União Europeia.
+Esta abordagem permite avaliar **como as relações mudam ao longo do tempo**, particularmente em períodos de crise como a **crise do euro** e
+a **pandemia de COVID-19**.
+
+O primeiro gráfico mostra a evolução do declive da regressão
+entre **Exportações e Crescimento do PIB**. Os resultados indicam que o
+impacto das exportações no crescimento económico **não é constante** ao
+longo do tempo:
+
+-   **Picos em 2012 e 2018** sugerem que, em momentos de recuperação
+    económica, o comércio externo teve um papel particularmente
+    importante para impulsionar o PIB.
+
+-   O **declive permanece positivo em todos os anos**, confirmando que,
+    em média, o aumento das exportações está associado a um maior
+    crescimento económico.
+
+-   Em **2020**, observa-se uma quebra no impacto, possivelmente
+    associada às disrupções provocadas pela pandemia. Ainda assim, o
+    efeito volta a subir ligeiramente nos anos seguintes.
+
+Estes resultados reforçam a ideia de que **as exportações são um motor relevante do crescimento**, especialmente em contextos de crise, e que o seu impacto é sensível ao ciclo económico.
+
+A segunda regressão analisa o impacto das exportações sobre a desigualdade. O declive da regressão entre **Exportações e Gini** mostra:
+
+- Um **efeito desigualador mais forte em 2013**, onde os aumentos nas exportações estão associados a um aumento mais acentuado na
+    desigualdade.
+
+- Em anos como **2016 a 2018**, o efeito é quase nulo, sugerindo que o comércio teve um impacto neutro na distribuição de rendimentos.
+
+- **Em 2021 e 2022**, o impacto volta a subir, o que pode refletir um processo de recuperação assimétrica no pós-COVID, com setores ou países a beneficiarem mais do que outros.
+
+Estes resultados estão em linha com a literatura (ex: Helpman et al., 2010), que sugere que **o comércio pode aumentar a desigualdade**, especialmente se beneficiar mais os grupos já privilegiados.
+
+A terceira análise estima o impacto das exportações na **taxa de pobreza**. Os declives são positivos, mas **muito pequenos** ao longo dos anos:
+
+- Entre 2011 e 2015, há uma ligeira subida no coeficiente, mas o efeito nunca ultrapassa 0.04.
+
+- A partir de 2016, o impacto tende a ser ainda mais reduzido.
+
+- Isto sugere que **o comércio externo, por si só, tem efeito limitado na redução da pobreza**, e que os seus benefícios **não chegam automaticamente às camadas mais vulneráveis** da população.
+
+Por fim, a relação entre **desigualdade e pobreza** revela-se forte e
+persistente:
+
+- Entre 2010 e 2018, o declive da regressão **Gini → Pobreza**mantém-se elevado, acima de 0.08, indicando que maior desigualdade está fortemente associada a maiores taxas de pobreza.
+
+- A partir de 2019, este impacto parece diminuir, possivelmente refletindo medidas de proteção social durante a pandemia.
+
+Estes resultados confirmam que **a desigualdade é um determinante central da pobreza** na UE, e que **o crescimento económico impulsionado pelas exportações não é suficiente se não for acompanhado de políticas redistributivas eficazes**.
+
+#### Análise de Regressão
+
+Os gráficos exploratórios apresentados na secção anterior fornecem
+insights preliminares acerca das relações entre o crescimento das
+exportações, o crescimento do PIB, o índice de Gini e a taxa de pobreza
+na União Europeia entre 2010 e 2023, contudo, as visualizações não
+permitem inferir causalidade nem capturar possíveis efeitos não lineares
+ou heterogeneidade entre países e períodos de crise. Assim, este estudo
+propõe estimar quatro modelos de regressão para investigar de forma mais
+robusta as seguintes questões: 
+(1) as exportações impulsionam o crescimento do PIB? 
+(2) as exportações afetam a desigualdade de renda?
+(3) as exportações reduzem a taxa de pobreza? 
+(4) quais os determinantes do crescimento económico dos países da UE?
+Os modelos seguintes, baseados na função de Mincer adaptada para o contexto do comércio, serão
+utilizados para quantificar esses efeitos e testar a influência de
+crises económicas na UE.
+
+```{r Análise de Regressão, echo=FALSE}
+library(plm)
+library(readr)
+library(dplyr)
+
+dados <- read_csv("dataset_completo.csv", show_col_types = FALSE)
+
+# Cria a dummy de crise
+dados$crise <- ifelse(dados$Year %in% c(2012, 2020), 1, 0)
+
+# Remove linhas com NA nas variáveis principais
+dados_modelo <- dados %>%
+  filter(!is.na(GDP_growth), !is.na(Exportacions))
+
+names(dados_modelo)[names(dados_modelo) == "Country Name"] <- "Country"
+names(dados_modelo)[names(dados_modelo) == "Poverty(% of population)"] <- "Poverty"
+
+painel <- pdata.frame(dados_modelo, index = c("Country", "Year"))
+
+
+##modelo base de efeitos fixos
+modelo_fx <- plm(GDP_growth ~ Exportacions, data = painel, model = "within")
+summary(modelo_fx)
+
+##modelo com dummy de crise
+modelo_fx_crise <- plm(GDP_growth ~ Exportacions + crise, data = painel, model = "within")
+summary(modelo_fx_crise)
+
+##modelo com interação
+modelo_interacao <- plm(GDP_growth ~ Exportacions * crise, data = painel, model = "within")
+summary(modelo_interacao)
+
+##modelo multivariado 
+modelo_multi <- plm(GDP_growth ~ Exportacions + Gini_index + `Poverty` + crise, data = painel, model = "within")
+summary(modelo_multi)
+
+
+library(modelsummary)
+
+modelos <- list(
+  "FX Base"      = modelo_fx,
+  "FX + Crise"   = modelo_fx_crise,
+  "Interação"    = modelo_interacao,
+  "Multivariado" = modelo_multi
+)
+
+modelsummary(modelos, stars = TRUE, fmt = 3, output = "markdown")
+```
+
+
+#### Modelo 1 - Exportações como Motor do Crescimento: Estimativa com Efeitos Fixos
+
+$$ GDPgrowth_{it} = \alpha_i + \beta_1 Exportations_{it} + \epsilon_{it}  $$
+onde:
+
+-   $GDPgrowth_{it}$ é a taxa de crescimento económico para o país $i$
+    no ano $t$ (variável dependente);
+
+-   $Exportations_{it}$ é a taxa de crescimento das exportações por país
+    $i$ no ano $t$ (variável explicativa);
+
+-   $\alpha_i$ é o efeito fixo específico de cada país, captura
+    características estruturais do país que não mudam ao longo do tempo;
+
+-   $\beta_1$ coeficiente que mede o impacto das exportações no
+    crescimento do PIB;
+
+-   $\varepsilon_c$ é o termo de erro, representa fatores não observados
+    que afetam o crescimento do PIB.
+
+Para fazer a interpretação de $\beta_1$, temos de considerar a derivada
+parcial: $$\frac{\partial GDPgrowth}{\partial Exportations} = \beta_1$$
+
+Com base no resultado da regressão, o coeficiente
+para **Exportations** é **0.295850** e é estatisticamente significativo
+ao nível de 0.1% (valor p < 0.001). Isso significa que, em média, um
+aumento de 1 ponto percentual no crescimento das exportações está
+associado a um aumento de aproximadamente 0.30 pontos percentuais no
+crescimento do PIB, assumindo que as características estruturais de cada
+país permanecem constantes.
+
+Em termos económicos, isto sugere uma relação positiva e robusta entre
+as exportações e o crescimento económico, consistente com as teorias de
+crescimento liderado pelas exportações, segundo as quais o aumento das
+exportações impulsiona a procura agregada, a produção e a atividade
+económica nos países da União Europeia.
+
+Para avaliar se o crescimento das exportações desempenha um papel na
+determinação do crescimento do PIB, realizamos o seguinte teste
+estatístico:
+
+$$H_0: \beta_1 = 0$$ $$H_1: \beta_1 \neq 0$$ Para testar essas
+hipóteses, realizamos o seguinte teste t:
+$$t = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}$$ Para o modelo 1 é:
+
+$$t = \frac{0.295850 - 0}{0.029745} \approx 9.95$$Como a amostra tem 310
+observações e o número de parametros estimados é 1, o número de graus de
+liberdade é:
+
+$$
+GL = 310-1 = 309
+$$
+
+Para um nível de significância $\alpha = 0.05$ e 309 graus de liberdade
+, o valor crítico aproximado de t é:
+
+$$t_{crit} \approx 1.97$$ Já que:
+
+$$|9.95|>1.97$$ Concluímos que o coeficiente é estatísticamente
+significativo, então rejeitamos $H_0$, o que significa que o crescimento
+das exportações tem um impacto positivo e significativo no crescimento
+do PIB dos países analisados.
+
+Portanto, os países que mais exportam tendem a apresentar um maior
+crescimento económico.
+
+*Procedimento Automático: Comparar com a Estatística t*
+
+```{r Teste de hipoteses linear automático modelo_fx}
+
+library(car)
+names(coef(modelo_fx))
+
+# Teste H0: beta_1 = 0
+linearHypothesis(modelo_fx, "Exportacions = 0")
+
+```
+
+Os resultados do teste automático confirmam esta conclusão, com uma
+estatística qui-quadrado de **98.93** e um valor-p inferior
+a **2.2e-16**, indicando que o coeficiente da
+variável *Exportations* é **altamente significativo ao nível de 0.1%**(p < 0.001).
+
+Este resultado reforça que o crescimento das exportações tem um impacto
+estatisticamente significativo no crescimento económico dos países da
+União Europeia, sustentando a hipótese de que o comércio internacional
+funciona como motor de dinamismo económico no espaço europeu.
+
+```{r gráfico 1}
+library(ggplot2)
+
+# Parâmetros do Modelo 1
+df0 <- 309  # 310 observações - 1 parâmetro
+critical_value <- qt(0.975, df = df0)  # Para 5% de significância bilateral
+observed_t <- 6.76  # Valor t observado do modelo
+
+# Gerar dados para a densidade t
+x <- seq(-8, 8, length.out = 500)
+y <- dt(x, df0)
+data <- data.frame(x = x, y = y)
+
+# Construir o gráfico
+ggplot(data, aes(x = x, y = y)) +
+  geom_line(color = "black") +
+  geom_area(data = subset(data, x <= -critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_area(data = subset(data, x >= critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_vline(xintercept = c(-critical_value, critical_value), color = "blue", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = observed_t, color = "red", linetype = "dashed", linewidth = 0.8) +
+  labs(title = "Distribuição t-Student com Regiões de Rejeição",
+       x = "Valor t",
+       y = "Densidade") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  annotate("text", x = observed_t, y = 0.05,
+           label = paste0("Observed t = ", round(observed_t, 2)),
+           color = "red", hjust = -0.1)
+
+```
+
+O gráfico da distribuição t-Student permite visualizar a significância
+estatística do coeficiente estimado para a variável *Exportacions* no
+Modelo 1. Com um valor observado de **t = 6.76**, a linha vermelha
+encontra-se bem dentro da região de rejeição (marcada a azul), o que
+confirma visualmente que o coeficiente é **altamente significativo ao
+nível de 0.1%**.
+
+Este resultado reforça que existe evidência estatística robusta para
+rejeitar a hipótese nula de que as exportações não têm impacto sobre o
+crescimento do PIB, validando a conclusão obtida anteriormente com o
+teste automático linearHypothesis()`.
+
+Para construirmos o intervalo de confiança a 95% para $\beta_1$:
+
+$$\text{CI} = \hat{\beta}_1 \pm t^* \cdot SE(\hat{\beta}_1)$$ Onde:
+
+-   $\hat{\beta}_1 = 0.295850$ (estimador pontual),
+
+-   $SE(\hat{\beta}_1) = 0.043766$ (erro padrão),
+
+-   $t^*$ é o valor crítico da distribuição para um nível de confiança
+    de 95%. Para tamanhos de amostra grandes,
+
+    $t^* \approx 1.97$
+
+$$\text{CI} = 0.295850 \pm 1.97 \cdot 0.043766$$ A margem de erro é:
+$$1.97 \cdot 0.043766 =0.08622 $$
+
+Assim, o intervalo de confiança a 95% é:
+$$[0.295850 -0.08622 , 0.295850 + 0.08622 ] = [0.2096, 0.3821]$$ O
+intervalo de confiança a 95% para $\beta_1$ não inclui zero, isso
+implica que rejeitemos a hipótese nula para o nível de significância de
+5%.
+
+Esse resultado indica que há evidências fortes para sugerir que
+$\beta_1$, o efeito de Exportations no Modelo 1, é estatisticamente
+diferente de zero. Portanto, o preditor tem um impacto estatisticamente
+significativo na variável dependente (GDPgrowth).
+
+#### Modelo 2 - Crescimento e Crises: Exportações com Dummy Temporal
+
+$$ GDPgrowth_{it} = \alpha_i + \beta_1 Exportations_{it} + \beta_2 crise_{t} + \epsilon_{it} $$Onde:
+
+-   $crise_{t}$ é uma variável dummy (0 ou 1) que assume valor 1 nos
+    anos de crise (ex.: 2012 e 2020), e 0 nos restantes;
+
+Para fazer a interpretação de $\beta_1$, temos de considerar a derivada
+parcial : $$\frac{\partial GDPgrowth}{\partial Exportations} = \beta_1$$
+
+O coeficiente para **Exportations** é 0,236, com um valor t de 7,86 e um
+p-valor de 8,29e-14, indicando que existe uma relação positiva e
+altamente significativa entre o crescimento das exportações e o
+crescimento do PIB. Isto significa que, mantendo o efeito das crises
+constante, um aumento de 1 ponto percentual nas exportações está
+associado, em média, a um aumento de aproximadamente 0,24 pontos
+percentuais no crescimento do PIB dos países analisados.
+
+$$\frac{\partial GDPgrowth}{\partial crise} = \beta_2$$
+
+Por outro lado, o coeficiente para **crise** é -2,216, com um valor t de
+-5,80 e p-valor de 1,76e-8, também altamente significativo. Este
+resultado indica que, controlando pelo crescimento das exportações, a
+ocorrência de uma crise está associada a uma diminuição média de cerca
+de 2,22 pontos percentuais no crescimento do PIB, em comparação com
+períodos sem crise.
+
+Em resumo, os resultados mostram que tanto o crescimento das exportações
+como a ocorrência de crises têm impactos estatisticamente significativos
+e economicamente relevantes sobre o crescimento económico dos países da
+amostra.
+
+Para avaliar se o crescimento das exportações e a ocorrência de crises
+económicas desempenham um papel significativo na determinação do
+crescimento do PIB, foi realizado um teste estatístico conjunto.
+
+$$H_0: \beta_2= 0$$ $$H_1: \beta_2 \neq 0$$
+
+Para testar essas hipóteses, realizamos o seguinte teste t:
+$$t = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}$$ Para o modelo 2 é:
+
+$$t = \frac{ - 2.215960}{0.381969} \approx -5.8014$$ Como a amostra tem
+310 observações e o número de parametros estimados é de 2, o número de
+graus de liberdade é 308. Para um nível de significância $\alpha = 0.05$
+e 308 graus de liberdade, o valor crítico aproximado de t é:
+
+$$t_{crit} \approx 1.96$$ Já que:
+
+$$|-5.8014|>1.96$$
+
+A estatística t associada ao coeficiente da variável *crise* apresenta
+um valor absoluto superior ao valor crítico de referência (\|t\| > 1.96
+para 5%, por exemplo), e o respetivo p-valor é inferior a 0.001. Assim,
+rejeitamos a hipótese nula de que o coeficiente é igual a zero,
+concluindo que a ocorrência de crises tem um**impacto negativo e estatisticamente significativo** no crescimento do PIB nos países da
+União Europeia.\
+Este resultado indica que, **controlando pelo efeito das exportações**,
+os anos de crise estão associados, em média, a uma queda significativa
+no crescimento económico.
+
+*Procedimento Automático: Comparar com a Estatística t*
+
+```{r Teste de hipoteses linear automático modelo_fx_crise}
+linearHypothesis(modelo_fx_crise, c("Exportacions = 0", "crise = 0"))
+
+```
+
+O teste resultou numa estatística qui-quadrado de $143,96$ com 2 graus
+de liberdade e um **valor-p < 2,2e-16**. Este valor é extremamente
+pequeno, permitindo rejeitar a hipótese nula ao nível de significância
+mais exigente (inferior a 0,1%).
+
+Assim, **rejeitamos a hipótese nula** e concluímos que **pelo menos uma das variáveis — ou ambas — têm um efeito estatisticamente significativo
+sobre o crescimento do PIB**.
+Este resultado reforça a validade do modelo e confirma que incluir tanto
+as exportações como os efeitos de crises económicas é estatisticamente
+justificado.
+
+```{r gráfico 2}
+library(ggplot2)
+
+df0 <- 308   # Graus de liberdade ajustado para o teu modelo
+critical_value <- 1.968  # Nível de significância de 1% (bicaudal)
+observed_t <- -5.80  # Valor t real da variável crise
+
+x <- seq(-6, 6, length.out = 500)
+y <- dt(x, df0)
+data <- data.frame(x = x, y = y)
+
+ggplot(data, aes(x = x, y = y)) +
+  geom_line(color = "black") + 
+  geom_area(data = subset(data, x <= -critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_area(data = subset(data, x >= critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_vline(xintercept = c(-critical_value, critical_value), color = "blue", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = observed_t, color = "red", linetype = "dashed", linewidth = 0.8) +
+  labs(
+    title = "Distribuição t-Student – Modelo 2 (Variável crise)",
+    x = "Valor t",
+    y = "Densidade"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  annotate("text", x = observed_t, y = 0.05, label = "Observed t = -5.80", color = "red", hjust = -0.1)
+
+```
+
+O gráfico da distribuição t-Student permite visualizar a significância
+estatística do coeficiente estimado para a variável *crise* no Modelo 2.
+
+Com um valor observado de $$t=−5,80$$ , a linha vermelha situa-se
+claramente dentro da região de rejeição (delimitada pelas linhas azuis
+correspondentes ao valor crítico), o que indica que o coeficiente é
+altamente significativo ao nível de 0,1%.
+
+Este resultado reforça a evidência estatística robusta para rejeitar a
+hipótese nula de que os efeitos de crises económicas não influenciam o
+crescimento do PIB. Assim, confirma-se visualmente a conclusão já obtida
+com o teste de hipótese linear `linearHypothesis()`, validando a
+inclusão da variável crise` no modelo.
+
+Para construirmos o intervalo de confiança a 95% para $\beta_2$:
+
+$$\text{CI} = \hat{\beta}_2 \pm t^* \cdot SE(\hat{\beta}_2)$$
+
+Onde:
+
+-   $\hat{\beta}_2 = -2.215960$ (estimador pontual),
+
+-   $SE(\hat{\beta}_2) = 0.381969$ (erro padrão),
+
+-   $t^*$ é o valor crítico da distribuição para um nível de confiança
+    de 95%. Para tamanhos de amostra grandes, $t^* \approx 1.96$
+
+$$\text{CI} = -2.215960 \pm 1.96 \cdot 0.381969$$ The margin of error
+is: $$1.96 \cdot 0.381969 = 0.75 $$
+
+Assim, o intervalo de confiança a 95% é:
+$$[-2.215960 - 0.75 , -2.215960 + 0.75 ] = [-2.9646, -1.4673]$$
+
+Como este intervalo **não inclui zero**, isso significa que rejeitamos a
+hipótese nula de que o efeito da crise é nulo ao nível de significância
+de 5%.
+
+Portanto, este resultado indica que há evidências estatísticas
+suficientes para afirmar que o efeito da variável crise sobre o
+crescimento do PIB é diferente de zero. Em outras palavras, a crise tem
+um impacto estatisticamente significativo na variável dependente
+(crescimento do PIB) no contexto do modelo estimado.
+
+#### Modelo 3 – Interação entre Exportações e Crises
+
+$$ GDPgrowth_{it} = \alpha_i + \beta_1 Exportations_{it} + \beta_2 crise_t + \beta_3 (Exportations_{it} \cdot crise_t) + \epsilon_{c} $$
+Onde:
+
+-   $Exportations_{it} \cdot crise_t$ é a variável de interação que
+    captura se o efeito das exportações sobre o crescimento do PIB é
+    diferente durante períodos de crise
+
+Para fazer a interpretação de $\beta_1$, temos de considerar a derivada
+parcial:
+
+$$\frac{\partial GDPgrowth}{\partial Exportations} = \beta_1$$
+
+Este valor representa o **efeito marginal das exportações sobre o
+crescimento do PIB quando `crise = 0`**.
+
+$$\frac{\partial GDPgrowth}{\partial crise} = \beta_2 + \beta_3 \cdot Exportations$$
+
+Ou seja, o impacto das crises **não é fixo** - **depende do nível das
+exportações**.\
+Se $Exportations=0$ então o impacto da crise será apenas $\beta_2$.
+
+$$\frac{\partial GDPgrowth}{\partial Exportations} = \beta_1 + \beta_3 \cdot crise$$
+
+Ou seja, **durante uma crise**, o efeito total das exportações é
+ajustado pelo coeficiente da interação.
+
+No Modelo 3, introduzimos uma interação entre o crescimento das
+exportações e a variável `crise`, com o objetivo de avaliar se o efeito
+das exportações sobre o crescimento económico varia em períodos de
+instabilidade.
+
+Os resultados obtidos confirmam que todas as variáveis incluídas no
+modelo são estatisticamente significativas. O coeficiente associado às
+exportações é de 0,205 e um p-valor inferior a 0,001, indicando que, em
+anos normais (ou seja, quando `crise = 0`), um aumento de 1 ponto
+percentual nas exportações está associado, em média, a um crescimento de
+0,205 pontos percentuais no PIB real.
+
+Já o coeficiente da variável `crise` é de -2,752 (p \< 0,001), o que
+sugere que, em anos de crise e assumindo exportações constantes, o
+crescimento económico tende a ser, em média, 2,75 pontos percentuais
+inferior ao observado em anos sem crise.
+
+A variável de interação entre `Exportations` e `crise` apresenta um
+coeficiente de 0,259 e um p-valor de 0,003, sendo significativa ao nível
+de 1%.
+
+Este resultado indica que, durante crises, o efeito das exportações
+sobre o PIB se intensifica.
+
+Especificamente, o efeito marginal das exportações em anos de crise
+passa a ser de 0,464 pontos percentuais (0,205 + 0,259), revelando que o
+comércio internacional pode desempenhar um papel compensatório em
+contextos adversos.
+
+Para **testar se a interação entre exportações e crise tem efeito
+significativo** sobre o crescimento do PIB realizamos o seguinte teste
+estatístico:
+
+$$H_0: \beta_3 = 0$$
+
+$$
+H_1: \beta_3 \neq 0
+$$
+
+Para testar essas hipóteses, realizamos o seguinte teste t:
+$$t = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}$$ Para o modelo 3 é:
+
+$$t = \frac{0.259 - 0}{0.087} \approx 2.99$$ Como a amostra tem 310
+observações e o número de parametros estimados é de 27, o número de
+graus de liberdade é 283. Para um nível de significância $\alpha = 0.05$
+e 283 graus de liberdade, o valor crítico aproximado de t é:
+
+$$t_{crit} \approx 1.968$$ Já que:
+
+$$|2.99|> 1.968$$Rejeitamos a hipótese nula de que a interação é nula.
+Assim, concluímos que o efeito das exportações sobre o crescimento
+económico varia significativamente em função da ocorrência de crises.
+
+*Procedimento Automático: Comparar com a Estatística t*
+
+```{r Teste de significância conjunta}
+library(car)
+library(plm)
+
+# Teste de significância conjunta com matriz de variância robusta
+linearHypothesis(
+  modelo_interacao,
+  c("Exportacions = 0", "crise = 0", "Exportacions:crise = 0"),
+  vcov = vcovHC(modelo_interacao, method = "arellano", type = "HC1")
+)
+
+```
+
+O teste de significância conjunta aplicado ao Modelo 3 permite avaliar
+se as variáveis `Exportacions`, `crise`e a sua interação contribuem
+significativamente para explicar o crescimento do PIB. Com uma
+estatística de teste igual a 169.52 e um valor-p inferior a 0.001, os
+resultados indicam que pelo menos uma das variáveis tem um efeito
+estatisticamente significativo no modelo. Este resultado reforça a
+robustez do modelo com interação, sugerindo que tanto as exportações
+como as crises — e a forma como interagem — são determinantes relevantes
+para explicar o desempenho económico dos países da União Europeia ao
+longo do período analisado.
+
+```{r gráfico 3}
+library(ggplot2)
+
+# Parâmetros
+df0 <- 283  # graus de liberdade do modelo 3
+critical_value <- 1.968
+observed_t <- 2.99  # t observado para a interação Exportacions:crise
+
+# Dados para a distribuição t
+x <- seq(-4, 4, length.out = 500)
+y <- dt(x, df0)
+data <- data.frame(x = x, y = y)
+
+# Gráfico
+ggplot(data, aes(x = x, y = y)) +
+  geom_line(color = "black") +
+  geom_area(data = subset(data, x <= -critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_area(data = subset(data, x >= critical_value), aes(x = x, y = y), fill = "gray", alpha = 0.5) +
+  geom_vline(xintercept = c(-critical_value, critical_value), color = "blue", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = observed_t, color = "red", linetype = "dashed", linewidth = 0.8) +
+  labs(
+    title = "Distribuição t-Student – Modelo 3 (Interação Exportações × Crise)",
+    x = "Valor t",
+    y = "Densidade"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  annotate("text", x = observed_t, y = 0.05, label = "Observed t = 2.99", color = "red", hjust = -0.1)
+
+```
+
+Este resultado confirma que o impacto das exportações sobre o
+crescimento do PIB **não é constante ao longo do tempo**, sendo
+significativamente diferente nos anos de crise (como 2012 e 2020). Ou
+seja, existe evidência estatística de que a relação entre exportações e
+crescimento económico **se intensifica ou se altera durante períodos de
+instabilidade**. Esta conclusão vai ao encontro do objetivo central do
+estudo, que visa compreender como o comércio internacional influencia o
+desenvolvimento económico em contextos de crise.
+
+Para construirmos o intervalo de confiança a 95% para $\beta_3$:
+
+$$\text{CI} = \hat{\beta}_3 \pm t^* \cdot SE(\hat{\beta}_3)$$
+
+Onde:
+
+-   $\hat{\beta}_3 = 0.259330$ (estimador pontual),
+
+-   $SE(\hat{\beta}_3) = 0.086776$ (erro padrão),
+
+-   $t^*$ é o valor crítico da distribuição para um nível de confiança
+    de 95%. Para tamanhos de amostra grandes,
+
+    $t^* \approx 1.968$
+
+$$\text{CI} = 0.259330 \pm 1.968 \cdot 0.086776$$ The margin of error
+is: $$1.968 \cdot 0.086776 = 0.17081 $$
+
+Assim, o intervalo de confiança a 95% é:
+$$[0.259330 -0.17081 , 0.259330 + 0.17081 ] = [0.0885, 0.4301]$$ 
+O intervalo de confiança a 95% para $\beta_3$ não inclui zero, conclui-se
+que o efeito estimado é **estatisticamente significativo ao nível de 5%**.
+Este resultado confirma que o impacto das exportações no crescimento do
+PIB **é alterado durante os anos de crise**, reforçando a hipótese de
+que os efeitos do comércio internacional são condicionados por contextos
+económicos adversos.
+
+#### Modelo 4 – Determinantes do Crescimento: Comércio, Desigualdade, Pobreza e Crises
+
+$$ GDPgrowth_{it} = \alpha_i + \beta_1 Exportations_{it} + \beta_2 GiniIndex_{it} + \beta_3Poverty_{it} + \beta_4 crise_t + \epsilon_{it} $$
+Onde:
+
+-   $GiniIndex_{it}$ é a desigualdade de rendimentos para o país i no ano t
+-   $Poverty_{it}$ é a percentagem da população em situação de pobreza no país i no ano t
+
+Para fazer a interpretação de $\beta_1, \beta_2, \beta_3, \beta_4$,
+temos de considerar a derivada parcial:
+
+$$\frac{\partial GDPgrowth}{\partial Exportations} = \beta_1$$
+
+$$\frac{\partial GDPgrowth}{\partial GiniIndex} = \beta_2 $$
+
+$$\frac{\partial GDPgrowth}{\partial Poverty = \beta_3 $$
+
+$$\frac{\partial GDPgrowth}{\partial crise} = \beta_4 $$
+
+Os resultados do Modelo 4 revelam efeitos significativos e
+economicamente relevantes de várias variáveis sobre o crescimento do PIB
+nos países da União Europeia entre 2010 e 2023. O coeficiente associado
+às **exportações** é positivo e significativo (\beta_1 = 0,285, p_value < 0,001),
+indicando que um aumento de 1 ponto percentual nas exportações está
+associado, em média, a um acréscimo de 0,285 pontos percentuais no
+crescimento económico, controlando pelas restantes variáveis.
+
+A **desigualdade de rendimentos**, medida pelo índice de Gini, apresenta
+um coeficiente negativo e estatisticamente significativo (\beta_2 = -0,414, p_value < 0,001), sugerindo que um aumento da desigualdade em 1 unidade reduz o
+crescimento do PIB em cerca de 0,41 pontos percentuais.
+
+A **pobreza**, embora com coeficiente negativo (\beta_3 = -0,973), não se
+revela estatisticamente significativa ao nível de 5% (p_value = 0,10), o que
+indica que, nesta amostra, a relação entre a taxa de pobreza e o
+crescimento económico não é robusta.
+
+Por fim, a variável **crise** tem um impacto negativo forte e
+significativo (\beta_4 = -2,199, p_value < 0,001), refletindo que, nos anos de
+crise (2012 e 2020), o crescimento do PIB foi, em média, 2,2 pontos
+percentuais inferior, mesmo após controlar pelos efeitos das outras
+variáveis.
+
+Para cada coeficiente testamos a seguinte hipótese:
+
+$$H_0: \beta_j = 0$$
+
+$$
+H_1: \beta_j \neq 0
+$$
+
+Para testar essas hipóteses, realizamos o seguinte teste t:
+$$t = \frac{\hat{\beta}_j - 0}{SE(\hat{\beta}_j)}$$ 1.Exportations
+
+$$t = \frac{0.2853 - 0}{0.0324} \approx 8.80$$
+
+2.GiniIndex
+
+$$t = \frac{-0.4135 - 0}{0.1144} \approx -3.62$$
+
+3.Poverty
+
+$$t = \frac{-0.9728 - 0}{0.5892} \approx -1.65$$
+
+4.Crise
+
+$$t = \frac{-2.1993- 0}{0.3442 \approx -6.39$$
+
+Como a amostra tem 245 observações e o número de parâmetros estimados é
+4, o número de graus de liberdade é 241. Para um nível de
+significância 5% e 241 graus de liberdade, o valor crítico
+aproximado de t é:
+
+$$t_{crit} \approx 1.97$$ Já que:
+
+$$|8.80|> 1.97$$
+
+$$|-3.62|> 1.97$$
+
+$$|-1.65|< 1.97$$
+
+$$|-6.39|> 1.97$$
+
+-   **Exportations:**\
+    Rejeitamos a hipótese nula. O coeficiente de Exportations é
+    estatisticamente significativo, indicando que as exportações têm um
+    efeito significativo sobre o crescimento do PIB.
+
+-   **Gini_index:**\
+    Rejeitamos a hipótese nula. O coeficiente de Gini_index é
+    estatisticamente significativo, mostrando que a desigualdade de
+    rendimentos afeta significativamente o crescimento do PIB.
+
+-   **Poverty:**\
+    Não rejeitamos a hipótese nula. O coeficiente de Poverty não é
+    estatisticamente significativo ao nível de 5%, pelo que não se pode
+    concluir que a pobreza tenha efeito significativo sobre o
+    crescimento do PIB no modelo estimado.
+
+-   **crise:**\
+    Rejeitamos a hipótese nula. O coeficiente de crise é
+    estatisticamente significativo, evidenciando que a ocorrência de
+    crises tem um impacto significativo e negativo no crescimento do
+    PIB.
+
+**Teste de Significância conjunta**
+
+```{r Teste de hipótese conjunta para todas as variáveis explicativas}
+
+library(car)
+linearHypothesis(modelo_multi, c("Exportacions = 0", 
+                                 "Gini_index = 0", 
+                                 "Poverty = 0", 
+                                 "crise = 0"))
+
+
+```
+
+O teste de hipótese conjunta foi realizado para verificar se as
+variáveis explicativas incluídas no Modelo 4 —
+nomeadamente,**Exportações**, **Índice de
+Gini**, **Pobreza** e **Crise** — têm um efeito significativo conjunto
+sobre o crescimento económico (PIB).
+
+A estatística de teste apresentou um valor de**χ² = 247.62** com **4 graus de liberdade**, e um **valor-p \< 2.2e-16**, permitindo **rejeitar inequivocamente a hipótese nula** de que todos os coeficientes são
+simultaneamente nulos.
+
+Assim, conclui-se que **as variáveis explicativas analisadas têm, em conjunto, um impacto estatisticamente significativo sobre o crescimento do PIB** na amostra estudada, reforçando a robustez do modelo na
+explicação do fenómeno económico em questão.
+
+```{r gráfico 4}
+library(ggplot2)
+
+# Parâmetros do Modelo 4
+df0 <- 217  # graus de liberdade residuais do modelo 4
+critical_value <- 1.968  # valor crítico para 95% com df > 200
+observed_t <- 8.797  # valor t de Exportacions
+
+# Dados da distribuição t
+x <- seq(-4, 4, length.out = 500)
+y <- dt(x, df0)
+data <- data.frame(x = x, y = y)
+
+# Gráfico
+ggplot(data, aes(x = x, y = y)) +
+  geom_line(color = "black") +
+  geom_area(data = subset(data, x <= -critical_value), aes(x = x, y = y),
+            fill = "gray", alpha = 0.5) +
+  geom_area(data = subset(data, x >= critical_value), aes(x = x, y = y),
+            fill = "gray", alpha = 0.5) +
+  geom_vline(xintercept = c(-critical_value, critical_value),
+             color = "blue", linetype = "dashed", linewidth = 0.8) +
+  geom_vline(xintercept = observed_t,
+             color = "red", linetype = "dashed", linewidth = 0.8) +
+  labs(
+    title = "Distribuição t-Student – Modelo 4 (Exportações)",
+    x = "Valor t",
+    y = "Densidade"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  annotate("text", x = observed_t, y = 0.05,
+           label = "Observed t = 8.797", color = "red", hjust = -0.1)
+
+
+```
+
+O gráfico da distribuição t-Student permite visualizar a significância
+estatística do coeficiente estimado para a variável **Exportations** no
+Modelo 4. O valor observado de **t = 8.797** encontra-se bem dentro da
+região de rejeição (demarcada a azul), o que confirma visualmente que
+este coeficiente é altamente significativo ao nível de 1%.
+
+Assim, **há forte evidência empírica** de que o crescimento das
+exportações está positivamente associado ao crescimento do PIB, mesmo
+quando se controla pelos efeitos da desigualdade (Gini), pobreza e
+crises. Este resultado reforça a robustez do modelo multivariado na
+explicação do desempenho económico dos países da UE entre 2010 e 2023.
+
+Para construirmos o intervalo de confiança a 95% para:
+
+$$\text{CI} = \hat{\beta} \pm t^* \cdot SE(\hat{\beta})$$
+
+Onde:
+
+Exportations:
+
+$$\text{CI} = 0.28527 \pm 1.971 \cdot 0.03243$$
+
+$$[0.2215, 0.3490]$$
+
+Gini_Index
+
+$$\text{CI} = -0.41353 \pm 1.971 \cdot 0.11437$$
+
+$$[-0.6388, -0.1883]$$
+
+Poverty:
+
+$$\text{CI} = -0.97281 \pm 1.971 \cdot 0.58923$$
+
+$$[-2.1304, 0.1848]$$
+
+crise:
+
+$$\text{CI} = -2.19928 \pm 1.971 \cdot 0.34425$$
+
+$$[-2.8794, -1.5192]$$
+
+Os intervalos de confiança a 95% para os coeficientes do Modelo 4
+revelam que as
+variáveis `Exportations`,x`Gini_index`e `crise` apresentam intervalos
+que **não incluem o zero**, o que reforça a sua significância
+estatística no modelo.\
+Por outro lado, o intervalo da variável `Poverty` inclui o valor zero,
+indicando que o seu efeito no crescimento do PIB **não é
+estatisticamente significativo** ao nível de 5%.
+
+#### Controlos Adicionais e Verificações de Robustez
+
+Para garantir a robustez e a validade dos resultados obtidos nos modelos
+de regressão com dados em painel, foram realizados diversos testes e
+procedimentos complementares, seguindo as melhores práticas em
+econometria.
+Estes procedimentos visam avaliar a especificação dos
+modelos, a presença de colinearidade, a homoscedasticidade dos erros, a
+significância conjunta dos coeficientes e a estabilidade das
+estimativas.
+
+#### Teste F - efeitos fixos vs. pooled OLS
+
+```{r teste f}
+modelo_pool_fx <- plm(GDP_growth ~ Exportacions, data = painel, model = "pooling")
+pFtest(modelo_fx, modelo_pool_fx)
+
+modelo_pool_crise <- plm(GDP_growth ~ Exportacions + crise, data = painel, model = "pooling")
+pFtest(modelo_fx_crise, modelo_pool_crise)
+
+modelo_pool_interacao <- plm(GDP_growth ~ Exportacions * crise, data = painel, model = "pooling")
+pFtest(modelo_interacao, modelo_pool_interacao)
+
+modelo_pool_multi <- plm(GDP_growth ~ Exportacions + Gini_index + Poverty + crise, data = painel, model = "pooling")
+pFtest(modelo_multi, modelo_pool_multi)
+
+```
+
+$$
+H_0: \text{O modelo pooled OLS é apropriado}
+$$
+
+$$
+H_1: \text{O modelo de efeitos fixos é necessário}
+$$
+O modelo 1 tem um p-value de 0.0135, o 2 de 0.103, e o 3 de 0.087 e, sendo todos estes valores superiores a 0.05, indicam que não rejeitamos a hipótese nula.
+A inclusão de efeitos fixos é justificada apenas no modelo 4, que tem um p-value de 0.003 (inferior a 0.05), onde há evidência estatística forte de heterogeneidade entre as unidades do painel. 
+Nos modelos 1, 2 e 3, não há suporte estatístico robusto para a
+inclusão de efeitos fixos, sendo o modelo pooled uma alternativa válida
+nestes casos
+
+#### Teste de Hausman - efeitos fixos vs. aleatórios
+
+```{r teste de Hausman}
+modelo_re_fx <- plm(GDP_growth ~ Exportacions, data = painel, model = "random")
+phtest(modelo_fx, modelo_re_fx)
+
+modelo_re_crise <- plm(GDP_growth ~ Exportacions + crise, data = painel, model = "random")
+phtest(modelo_fx_crise, modelo_re_crise)
+
+modelo_re_interacao <- plm(GDP_growth ~ Exportacions * crise, data = painel, model = "random")
+phtest(modelo_interacao, modelo_re_interacao)
+
+modelo_re_multi <- plm(GDP_growth ~ Exportacions + Gini_index + Poverty + crise, data = painel, model = "random")
+phtest(modelo_multi, modelo_re_multi)
+
+```
+
+$$
+H_0: \text{O modelo de efeitos aleatórios é consistente e eficiente}
+$$
+$$
+H_1: \text{O modelo de efeitos fixos é necesário}
+$$
+Mais uma vez, p-values de 0.0387, 0.294 e 0.215 dos modelos 1, 2 e 3, respetivamente, são superiores a 0.05 indicando que os resultados do Hausman Test sugerem que o modelo de efeitos aleatórios é adequado. 
+Para o modelo 4, que rejeita a hipótese nula com um p-value de 0.012,o modelo de efeitos fixos deve ser utilizado, pois é o único que garante consistência das estimativas.
+
+#### AIC e BIC
+
+```{r AIC e BIC}
+# Função para calcular AIC manualmente para modelos plm
+AIC_plm <- function(model) {
+  n <- nrow(model$model)                   
+  k <- length(coef(model))                  
+  res <- residuals(model)
+  sigma2 <- sum(res^2) / n                 # Corrigido: removido o acento
+  logLik <- -n/2 * (log(2*pi) + log(sigma2) + 1)
+  aic <- -2 * logLik + 2 * k
+  return(aic)
+}
+
+# Função para calcular BIC manualmente para modelos plm
+BIC_plm <- function(model) {
+  n <- nrow(model$model)                   
+  k <- length(coef(model))                 
+  res <- residuals(model)
+  sigma2 <- sum(res^2) / n                 
+  logLik <- -n/2 * (log(2*pi) + log(sigma2) + 1)
+  bic <- -2 * logLik + log(n) * k
+  return(bic)
+}
+
+# Calcular AIC e BIC para os quatro modelos
+aic_fx         <- AIC_plm(modelo_fx)
+aic_crise      <- AIC_plm(modelo_fx_crise)
+aic_interacao  <- AIC_plm(modelo_interacao)
+aic_multi      <- AIC_plm(modelo_multi)
+
+bic_fx         <- BIC_plm(modelo_fx)
+bic_crise      <- BIC_plm(modelo_fx_crise)
+bic_interacao  <- BIC_plm(modelo_interacao)
+bic_multi      <- BIC_plm(modelo_multi)
+
+# Mostrar os resultados
+cat("AIC:\n")
+cat("Modelo base:       ", aic_fx, "\n")
+cat("Modelo crise:      ", aic_crise, "\n")
+cat("Modelo interação:  ", aic_interacao, "\n")
+cat("Modelo multivariado:", aic_multi, "\n\n")
+
+cat("BIC:\n")
+cat("Modelo base:       ", bic_fx, "\n")
+cat("Modelo crise:      ", bic_crise, "\n")
+cat("Modelo interação:  ", bic_interacao, "\n")
+cat("Modelo multivariado:", bic_multi, "\n")
+
+
+```
+$$
+\text{Modelo 1: AIC = 1438; BIC = 1445}
+$$
+$$\text{Modelo 2: AIC = 1397; BIC = 1410}$$
+$$\text{Modelo 3: AIC = 1386; BIC = 1403}$$
+$$\text{Modelo 4: AIC = 1357; BIC = 1380}$$
+O modelo multivariado apresenta o melhor desempenho entre todas as
+especificações, os seus menores valores de AIC e BIC indicam o seu melhor ajuste entre os 4 modelos. Isto significa que, ao incluir variáveis
+adicionais como desigualdade (Gini_index), pobreza e a dummy de crise, o
+modelo consegue explicar de forma mais robusta o crescimento do PIB nos
+países analisados. Assim, o modelo multivariado é o mais indicado para
+fundamentar as conclusões deste estudo capturando com maior precisão as dinâmicas do crescimento na UE.
+
+#### Colinearidade
+
+```{r vif}
+library(car)
+
+# Remove NAs das variáveis relevantes
+painel_vif2 <- na.omit(painel[, c("GDP_growth", "Exportacions", "crise")])
+painel_vif3 <- na.omit(painel[, c("GDP_growth", "Exportacions", "crise")]) # Adapte para as interações se necessário
+painel_vif4 <- na.omit(painel[, c("GDP_growth", "Exportacions", "Gini_index", "Poverty", "crise")])
+
+# Modelo 2: com crise
+modelo_lm_crise <- lm(GDP_growth ~ Exportacions + crise, data = painel_vif2)
+cat("\nModelo 2: VIF\n")
+print(vif(modelo_lm_crise))
+
+# Modelo 3: com interação
+modelo_lm_interacao <- lm(GDP_growth ~ Exportacions * crise, data = painel_vif3)
+cat("\nModelo 3: VIF\n")
+print(vif(modelo_lm_interacao))
+
+# Modelo 4: multivariado
+modelo_lm_multi <- lm(GDP_growth ~ Exportacions + Gini_index + Poverty + crise, data = painel_vif4)
+cat("\nModelo 4: VIF\n")
+print(vif(modelo_lm_multi))
+
+```
+
+$$
+H_0: \text{Não há multicolineariedade significativa}
+$$
+$$
+H_1: \text{Não Há multicolineariedade significativa}
+$$
+Os modelos possuem um valor de VIF inferior a 5 indicando que rejetitam H0 e, por isso, não apresentam problemas de multicolinearidade. Isso
+significa que as estimativas dos coeficientes são robustas e não estão a
+ser inflacionadas pela correlação entre as variáveis explicativas.
+Podemos interpretar os efeitos das variáveis com confiança estatística sem preocupações com interdependências entre variáveis.
+
+#### Teste RESET
+
+```{r reset}
+library(lmtest)
+
+# Modelo 1: apenas Exportacions
+modelo_lm1 <- lm(GDP_growth ~ Exportacions, data = painel)
+cat("Modelo 1: Teste RESET\n")
+print(resettest(modelo_lm1, power = c(2, 3), type = "fitted"))
+
+# Modelo 2: Exportacions + crise
+modelo_lm2 <- lm(GDP_growth ~ Exportacions + crise, data = painel)
+cat("\nModelo 2: Teste RESET\n")
+print(resettest(modelo_lm2, power = c(2, 3), type = "fitted"))
+
+# Modelo 3: Exportacions * crise (interação)
+modelo_lm3 <- lm(GDP_growth ~ Exportacions * crise, data = painel)
+cat("\nModelo 3: Teste RESET\n")
+print(resettest(modelo_lm3, power = c(2, 3), type = "fitted"))
+
+# Modelo 4: multivariado
+modelo_lm4 <- lm(GDP_growth ~ Exportacions + Gini_index + Poverty + crise, data = painel)
+cat("\nModelo 4: Teste RESET\n")
+print(resettest(modelo_lm4, power = c(2, 3), type = "fitted"))
+
+```
+
+$$
+H_0: \text{O modelo está corretamente especificado}
+$$
+$$
+H_1: \text{O modelo está mal especificado}
+$$
+Apenas o modelo multivariado (Modelo 4) passa no teste RESET, com um p-value de 0.0523, superior a 0.05, mostrando especificação adequada. Os p-values dos modelos 1 (0.0002), 2 (0.0007) e 3 (0.001) rejeitam a hipótese nula apresentando sinais de omissão de variáveis ou problemas na forma funcional, reforçando que os modelos mais simples não capturam completamente as dinâmicas do crescimento do PIB e a superioridade o modelo multivariado para análise e interpretação dos resultados.
+
+#### Teste de Breusch-Pagan
+
+```{r breushpagan}
+library(lmtest)
+
+# Modelo 1
+cat("Modelo 1: Teste Breusch-Pagan\n")
+print(bptest(modelo_lm1))
+
+# Modelo 2
+cat("\nModelo 2: Teste Breusch-Pagan\n")
+print(bptest(modelo_lm2))
+
+# Modelo 3
+cat("\nModelo 3: Teste Breusch-Pagan\n")
+print(bptest(modelo_lm3))
+
+# Modelo 4
+cat("\nModelo 4: Teste Breusch-Pagan\n")
+print(bptest(modelo_lm4))
+
+```
+$$
+H_0: \text{Há homocedasticidade}
+$$
+$$
+H_1: \text{Não há homocedasticidade}
+$$
+Os resultados do teste de Breusch-Pagan indicam a presença de
+heterocedasticidade em todos os modelos estimados, uma vez que todos os
+p-value (0.0021, 0.0034, 0.0047, 0.0089) são significativamente inferiores a 0.05. Isto significa que a variância dos resíduos não é constante ao longo das observações, sendo
+necessário recorrer a erros padrão robustos para garantir a validade das
+inferências estatísticas dos modelos.
+
+#### White Test
+
+```{r white}
+library(lmtest)
+
+cat("Modelo 1: Teste de White\n")
+print(bptest(modelo_lm1, ~ .^2, data = modelo_lm1$model))
+
+cat("\nModelo 2: Teste de White\n")
+print(bptest(modelo_lm2, ~ .^2, data = modelo_lm2$model))
+
+cat("\nModelo 3: Teste de White\n")
+print(bptest(modelo_lm3, ~ .^2, data = modelo_lm3$model))
+
+cat("\nModelo 4: Teste de White\n")
+print(bptest(modelo_lm4, ~ .^2, data = modelo_lm4$model))
+
+```
+$$
+H_0: \text{Há homocedasticidade}
+$$
+
+$$
+H_1: \text{Há heterocedasticidade}
+$$
+
+Mais uma vez, os resultados do teste de White para todos os modelos apresentam
+p-value muito inferiores a 0.05, 0.0043 para o primeiro modelo, 0.0068 para o segundo, 0.0092 para o terceiro e 0.0157 para o modelo 4, indicando rejeição da hipótese nula de homocedasticidade. Assim, há evidências claras de heterocedasticidade
+nos resíduos de todos os modelos, confirmando a necessidade de utilizar
+erros padrão robustos para garantir a validade das inferências
+estatísticas.
+
+#### Estimação Robusta
+
+```{r coeftest}
+library(lmtest)
+coeftest(modelo_fx, vcov = vcovHC(modelo_fx, type = "HC1"))
+coeftest(modelo_fx_crise, vcov = vcovHC(modelo_fx_crise, type = "HC1"))
+coeftest(modelo_interacao, vcov = vcovHC(modelo_interacao, type = "HC1"))
+coeftest(modelo_multi, vcov = vcovHC(modelo_multi, type = "HC1"))
+
+```
+
+A estimação robusta dos modelos confirma que a variável Exportations é
+sempre estatisticamente significativa e positivamente associada ao
+crescimento do PIB em todas as especificações.
+
+A variável crise mostra um efeito negativo e significativo, enquanto a
+interação **Exportations:crise** é positiva e significativa no modelo
+correspondente, sugerindo que o impacto das exportações é diferente em
+períodos de crise.
+
+No modelo multivariado, além de Exportacions e crise, o índice de Gini
+também apresenta efeito negativo e significativo, indicando que maior
+desigualdade está associada a menor crescimento.
+
+A variável Poverty não é estatisticamente significativa. Esses
+resultados reforçam a robustez dos principais efeitos identificados,
+mesmo após o ajuste para heterocedasticidade
+
+#### Matriz Variância-Covariância
+
+```{r Matriz Variância-Covariância, echo=FALSE}
+vcov(modelo_fx)
+vcov(modelo_fx_crise)
+vcov(modelo_interacao)
+vcov(modelo_multi)
+```
+
+A análise da matriz de correlação mostra que as variáveis explicativas
+dos modelos apresentam coeficientes de correlação baixos entre si. Isso
+indica ausência de multicolinearidade relevante, reforçando a confiança
+nas estimativas dos coeficientes e na robustez dos resultados dos
+modelos de regressão.
+
+#### Combinação Linear de Parãmetros
+
+```{r comb. linear de parâmetros}
+library(car)
+
+# Modelo 1: Só tem Exportacions, logo só faz sentido testar esse coeficiente
+cat("Modelo 1: Teste se Exportacions = 0\n")
+print(linearHypothesis(modelo_lm1, "Exportacions = 0"))
+
+# Modelo 2: Testar soma dos coeficientes
+cat("\nModelo 2: Teste se Exportacions + crise = 0\n")
+print(linearHypothesis(modelo_lm2, "Exportacions + crise = 0"))
+
+# Modelo 3: Testar efeito marginal de Exportacions quando crise = 1
+cat("\nModelo 3: Teste se Exportacions + Exportacions:crise = 0\n")
+print(linearHypothesis(modelo_lm3, "Exportacions + Exportacions:crise = 0"))
+
+# Modelo 4: Testar soma dos efeitos de Exportacions e Gini_index
+cat("\nModelo 4: Teste se Exportacions + Gini_index = 0\n")
+print(linearHypothesis(modelo_lm4, "Exportacions + Gini_index = 0"))
+
+```
+
+```{r RSS}
+modelos <- list(modelo_lm1, modelo_lm2, modelo_lm3, modelo_lm4)
+nomes_modelos <- c("modelo_lm1", "modelo_lm2", "modelo_lm3", "modelo_lm4")
+
+for (i in seq_along(modelos)) {
+  rss <- deviance(modelos[[i]])
+  cat("Residual Sum of Squares (RSS) para", nomes_modelos[i], ":", rss, "\n")
+}
+
+```
+
+Os resultados dos testes de hipóteses para combinações lineares dos
+parâmetros mostram que, em todos os modelos, as combinações testadas são
+estatisticamente diferentes de zero, com valores de F elevados e
+p-valores muito inferiores a 0,05. Isto indica que os efeitos conjuntos
+das variáveis testadas (como Exportacions, crise, Exportacions:crise e
+Gini_index) são significativos para explicar o crescimento do PIB nos
+respetivos modelos. Assim, as hipóteses nulas de que essas combinações
+de coeficientes seriam iguais a zero são rejeitadas, reforçando a
+importância estatística dos efeitos analisados
+
+Os valores do Residual Sum of Squares (RSS) mostram uma redução
+progressiva à medida que os modelos se tornam mais completos: o RSS
+diminui de 1342,36 no modelo_lm1 para 816,87 no modelo_lm4. Isto indica
+que cada modelo adicional explica melhor a variabilidade dos dados, com
+o modelo_lm4 apresentando o melhor ajuste entre os quatro, ao minimizar
+a soma dos quadrados dos resíduos
+
+#### Teste de Chow
+
+Para avaliar se a relação entre o crescimento das exportações e o
+crescimento do PIB sofreu uma **quebra estrutural**durante períodos de
+crise económica, aplicámos um **Teste de Chow**. Neste caso, a variável
+de interesse que distingue os dois períodos é a ocorrência de **anos de crise** — nomeadamente, 2012, crise do euro e 2020, pandemia da COVID-19.
+
+$$GDPgrowth_  = \beta_0 + \beta_1 Exportacions + \beta_2 Gini_index + \beta_3 Poverty + \epsilon$$
+
+```{r Teste de Chow, echo=FALSE}
+
+library(dplyr)
+library(car)
+
+# Verifica os nomes reais das colunas para confirmar a variável de pobreza
+names(dados)
+
+# Filtra os dados pré-2020 e pós-2020
+dados_pre <- dados %>%
+  filter(Year < 2020) %>%
+  filter(!is.na(GDP_growth), !is.na(Exportacions), !is.na(Gini_index), !is.na(`Poverty(% of population)`))
+
+dados_pos <- dados %>%
+  filter(Year >= 2020) %>%
+  filter(!is.na(GDP_growth), !is.na(Exportacions), !is.na(Gini_index), !is.na(`Poverty(% of population)`))
+
+# Modelo conjunto com todos os dados
+modelo_all <- lm(GDP_growth ~ Exportacions + Gini_index + `Poverty(% of population)`,
+                 data = bind_rows(dados_pre, dados_pos))
+
+# Modelos separados
+modelo_pre <- lm(GDP_growth ~ Exportacions + Gini_index + `Poverty(% of population)`, data = dados_pre)
+modelo_pos <- lm(GDP_growth ~ Exportacions + Gini_index + `Poverty(% of population)`, data = dados_pos)
+
+# Estatísticas do teste de Chow
+RSS_all <- sum(residuals(modelo_all)^2)
+RSS_pre <- sum(residuals(modelo_pre)^2)
+RSS_pos <- sum(residuals(modelo_pos)^2)
+
+k <- length(coef(modelo_all))   # número de parâmetros estimados
+n1 <- nrow(dados_pre)
+n2 <- nrow(dados_pos)
+
+# Estatística F do Teste de Chow
+F_chow <- ((RSS_all - (RSS_pre + RSS_pos)) / k) / ((RSS_pre + RSS_pos) / (n1 + n2 - 2 * k))
+p_valor <- pf(F_chow, df1 = k, df2 = (n1 + n2 - 2 * k), lower.tail = FALSE)
+
+cat("Estatística F do Teste de Chow:", round(F_chow, 3), "\n")
+cat("Valor-p:", round(p_valor, 5), "\n")
+
+```
+**Hipóteses do Modelo** 
+Os coeficientes do modelo são iguais antes e depois de 2020:
+$$H_0: \beta_j,pre= \beta_j,pos$$
+H1: Pelo menos um dos coeficientes é diferente entre os períodos pré e pós 2020, ou seja, há uma qiebra estrutural nos parâmteros do modelo.
+
+A estatística F do teste de Chow é **6.253**, com um valor-p muito inferior a 0.01, o que leva à **rejeição da hipótese nula ao nível de
+significância de 1%**.
+
+Isto indica que **existe evidência estatisticamente significativa de uma
+quebra estrutural** na relação entre o crescimento das exportações e o
+crescimento do PIB a partir de 2020.
+Por outras palavras,**os efeitos
+das variáveis explicativas no modelo parecem ter mudado com a pandemia
+da COVID-19**.
+
+#### Mostrar o SSR para as regressões envolvidas no teste de Chow
+
+```{r SSR}
+
+
+# Calcular SSR (Sum of Squared Residuals)
+ deviance(modelo_all)
+ deviance(modelo_pre)
+ deviance(modelo_pos)
+
+
+```
+
+O teste de Chow revelou uma estatística F de aproximadamente 11.61, com
+valor-p muito inferior a 0.01, indicando uma quebra estrutural
+significativa na relação entre exportações e crescimento do PIB da UE a
+partir de 2020. Isto sugere que a pandemia alterou de forma
+significativa os determinantes do crescimento económico, reforçando a
+necessidade de políticas específicas para o contexto pós-crise.
+
+#### Esta é a estatística F para o teste de Chow, alternativa (B), slide 20
+
+$F = \frac {\frac {SSR_{R} - (SSR_{UR1} + SSR_{UR2})}{k+1}}{\frac {SSR_{UR1} + SSR_{UR2}}{n - 2(k+1)}}$
+
+```{r f-statistics}
+chi2_Chow <- round(((deviance(modelo_all) - (deviance(modelo_pre) + deviance(modelo_pos))) / (dim(model.matrix(modelo_all))[2])) / ((deviance(modelo_pre) + deviance(modelo_pos)) / (nobs(modelo_all) - 2 * dim(model.matrix(modelo_all))[2])), 1)
+chi2_Chow
+
+```
+
+```{r f-critical}
+F_critical <- qf(0.95, 4, nobs(modelo_all) - 8) 
+print(F_critical)
+```
+
+O teste de Chow aplicado para detetar uma possível quebra estrutural em
+2020 resultou numa estatística F de 6.3. Este valor ultrapassa
+claramente o valor crítico convencional (≈2.6 para nível de 1%),
+permitindo rejeitar a hipótese nula de estabilidade estrutural dos
+coeficientes entre os períodos pré e pós-pandemia. Assim, conclui-se que
+houve uma alteração estatisticamente significativa na relação entre
+exportações e crescimento do PIB na UE após 2020.
+
+A estatística F obtida (6.3) é **claramente superior** ao valor crítico
+de 2.41 para um nível de significância de 5%. Isto implica 
+rejeitarmos a hipótese nula de estabilidade estrutural. Concluímos,
+portanto, que houve **uma mudança significativa na relação entre as
+exportações e o crescimento do PIB após a pandemia de 2020**. Este
+resultado confirma a existência de **uma quebra estrutural** no modelo,
+consistente com o impacto económico provocado pela crise pandémica.
+
+
+```{r modelo_inter}
+
+library(readr)
+library(dplyr)
+
+# Carregar o dataset (substituir pelo caminho correto se necessário)
+df <- read_csv("dataset_completo.csv", show_col_types = FALSE)
+
+# Verificar estrutura do dataset
+str(df)
+
+# Renomear a coluna da pobreza (caso contenha parênteses)
+df <- df %>%
+  rename(Poverty = `Poverty(% of population)`)
+
+# Verificar se df agora é data.frame
+df <- as.data.frame(df)
+
+# Criar modelo com interação: Exportações × Pós-2020
+model_inter <- lm(
+  GDP_growth ~ Exportacions + I(Year >= 2020) + Exportacions:I(Year >= 2020) + 
+    Gini_index + Poverty,
+  data = df,
+  na.action = na.omit
+)
+
+
+summary(model_inter)
+
+```
+
+Este modelo confirma a **hipótese de quebra estrutural**:
+-A pandemia alterou a relação entre o comércio externo e o crescimento económico na UE.
+-O efeito das exportações no PIB **intensificou-se significativamente a partir de 2020**, o que pode refletir a importância das exportaçõescomo motor de recuperação económica pós-crise.
+
+#### Métricas adicionais de qualidade:AIC & BIC
+
+```{r AIC/BIC}
+
+AIC(model_inter)
+BIC(model_inter)
+
+
+```
+
+#### COLINEARIDADE: VIF
+
+```{r colinearidade}
+library(car)
+vif(model_inter)
+```
+
+#### Teste RESET
+
+```{r teste reset}
+library(lmtest)
+resettest(model_inter, power = 2:3, type = "regressor")
+```
+
+#### Testes de Heterocedasticidade
+
+#### Breusch-Pagan teste
+
+```{r breusch-pagan}
+bptest(model_inter)
+```
+
+#### White teste
+
+```{r white test}
+# Resíduos ao quadrado
+u2 <- resid(model_inter)^2
+
+# Obter a matriz de regressores (sem problemas com nomes)
+X <- model.matrix(model_inter)
+X_df <- as.data.frame(X)
+names(X_df) <- make.names(colnames(X_df))  # tornar nomes válidos
+
+# Criar todas as variáveis necessárias: quadrados e interações
+# Quadrados
+quad_terms <- X_df[, -1]^2  # exclui intercepto
+names(quad_terms) <- paste0(names(X_df[, -1]), "_sq")
+
+# Interações cruzadas
+interaction_terms <- combn(names(X_df[, -1]), 2, simplify = FALSE, FUN = function(vars) {
+  interaction <- X_df[[vars[1]]] * X_df[[vars[2]]]
+  name <- paste(vars[1], vars[2], sep = "_x_")
+  setNames(as.data.frame(interaction), name)
+})
+interaction_terms_df <- do.call(cbind, interaction_terms)
+
+# Combinar tudo num só data frame
+X_white <- cbind(X_df[, -1], quad_terms, interaction_terms_df)  # sem intercepto
+
+# Regressão auxiliar
+modelo_aux <- lm(u2 ~ ., data = X_white)
+
+# Estatística do teste
+n <- nrow(X_white)
+R2 <- summary(modelo_aux)$r.squared
+chi_sq <- n * R2
+df <- length(coef(modelo_aux)) - 1
+p_value <- 1 - pchisq(chi_sq, df)
+
+
+cat("Teste White:\n")
+cat("Estatística Chi-quadrado =", round(chi_sq, 2), "\n")
+cat("Graus de liberdade =", df, "\n")
+cat("Valor-p =", round(p_value, 5), "\n")
+
+
+```
+
+#### Estimação Robusta
+
+```{r coeftest model_inter}
+library(lmtest)
+library(sandwich)
+
+# Estimação robusta (White robust standard errors)
+coeftest(model_inter, vcov = vcovHC(model_inter, type = "HC1"))
+
+```
+
+O modelo com termo de interação entre exportações e o período pós-2020
+apresenta bons indicadores de desempenho estatístico. Os critérios de
+informação, com um AIC de 1005.87 e BIC de 1030.38, revelam um ajuste
+aceitável do modelo. A análise da multicolinearidade, através dos
+fatores de inflação da variância (VIF), indica que todos os valores
+estão abaixo de 3, com destaque para o maior VIF de 2.77 associado ao
+termo de interação, o que sugere ausência de problemas sérios de
+multicolinearidade entre as variáveis explicativas.
+
+O teste RESET (Regression Specification Error Test) apresentou um valor
+de 3.15 com um p-valor de 0.0021, indicando possível má especificação do
+modelo – nomeadamente, a omissão de variáveis relevantes ou forma
+funcional inadequada. Apesar disso, os testes de heterocedasticidade não
+apontam problemas significativos: tanto o teste de Breusch-Pagan (BP =
+7.40; p = 0.192) como o teste de White (χ² = 22.67; p = 0.305) não
+rejeitam a hipótese nula de homocedasticidade, o que reforça a
+consistência dos erros estimados.
+
+Para lidar com qualquer possível violação das suposições clássicas, foi
+aplicada uma estimação robusta dos erros padrão. Os resultados mantêm-se
+consistentes: o coeficiente associado às exportações (0.291) e ao termo
+de interação com o pós-2020 (0.288) são ambos estatisticamente
+significativos ao nível de 1%, reforçando a ideia de que o impacto das
+exportações sobre o crescimento económico aumentou no período
+pós-pandemia. O efeito direto do ano pós-2020 (−1.36) também é
+significativo (p ≈ 0.027), evidenciando um efeito negativo independente
+da crise. Já as variáveis *Gini_index* e *Poverty* não apresentam
+significância estatística no modelo, embora a variável *Poverty* se
+aproxime do limiar de 10%.
+
+Estes resultados sugerem que as exportações desempenham um papel
+importante e crescente no crescimento do PIB, especialmente após a crise
+pandémica, e que o modelo é estatisticamente robusto, ainda que com
+algumas reservas quanto à forma funcional.
+
+#### Diff in Diff
+
+$$GDPgrowth_{it} = \beta_0 + \beta_1 Post_t + \beta_2 Treated_i + \beta_3 \cdot (Post_t \cdot Treated_i)+ \gamma X_{it} + \epsilon$$
+
+Onde:
+
+-   GDPgrowth: crescimento do PIB do país i no ano t;
+
+-   Post: dummy temporal que vale 1 para anos após 2020;
+
+-   Treated: dummy que identifica países mais afetados (grupo de
+    tratamento);
+
+-   Post×Treated: termo de interação DiD (captura o efeito causal);
+
+-   X: vetores de controlos (ex.: Exportações, Gini, Pobreza);
+
+-   \beta_3 :**é o coeficiente de interesse** (estimador Diff).
+
+```{r Diff in Diff}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lmtest)
+library(sandwich)
+df <- read.csv("dataset_completo.csv")
+print(names(df))
+
+
+tratamento_df <- df %>%
+  filter(Year %in% c(2019, 2020)) %>%
+  select(Country.Name, Year, Exportacions) %>%
+  pivot_wider(names_from = Year, values_from = Exportacions) %>%
+  mutate(
+    diferenca = `2020` - `2019`,
+    tratado = ifelse(diferenca < 0, 1, 0)
+  ) %>%
+  select(Country.Name, tratado)
+
+# Juntar com o dataset original
+df_did <- df %>%
+  left_join(tratamento_df, by = "Country.Name") %>%
+  mutate(
+    post2020 = ifelse(Year >= 2020, 1, 0),
+    did = tratado * post2020
+  )
+
+# Modelo DiD simples: sem variáveis de controlo
+modelo_did_simplificado <- lm(GDP_growth ~ tratado + post2020 + did, data = df_did)
+
+summary(modelo_did_simplificado)
+
+# Estimação robusta (erro padrão robusto de White - HC1)
+library(lmtest)
+library(sandwich)
+coeftest(modelo_did_simplificado, vcov. = vcovHC(modelo_did_simplificado, type = "HC1"))
+
+# Modelo DiD com variáveis de controlo: desigualdade (Gini) e pobreza
+modelo_did_controlos <- lm(
+  GDP_growth ~ tratado + post2020 + did + Gini_index + Poverty...of.population.,
+  data = df_did
+)
+
+summary(modelo_did_controlos)
+
+# Estimação robusta (erro padrão robusto de White - HC1)
+coeftest(modelo_did_controlos, vcov. = vcovHC(modelo_did_controlos, type = "HC1"))
+```
+
+No modelo DiD sem variáveis de controlo, os coeficientes representam:
+- \beta_0 (intercepto) : Crescimento médio do PIB no grupo de controlo (países não tratados) antes de 2020;
+-\beta_1 (tratado) : Diferença inicial no crescimento do PIB entre grupos tratado e controlo antes de 2020;
+- \beta_2 (pós 2020) : Efeito temporal comum após 2020 no grupo de controlo;
+- \beta_3 : Efeito causal da intervenção (queda das exportações) no grupo de controlo.
+
+No modelo DiD com variáveis de controlo, além dos anteriores temos também: Gini_index (\beta_4), efeito marginal da desigualdade no crescimento do PIB, mantendo outros fatores constantes e Poverty(\beta_5), efeito marginal da pobreza no crescimento do PIB, nas mesmas condições anteriores.
+
+O \beta_3 (-1.86 no Modelo 1; -1.23 no Modelo 2) sugere uma redução no crescimento do PIB associada à queda nas exportações, mas a ausência de significância estatística (p-valor > 0.05) e o baixo R (1.7%) indicam que o impacto não é robusto estatisticamente, fatores não observáveis podem dominar a relação e a queda nas exportações não explica variações significativas no crescimento económico nos dados analisados.
+
+```{r Gráfico DiD}
+library(dplyr)
+library(ggplot2)
+
+# Calcular médias do crescimento do PIB por grupo e ano
+df_plot <- df_did %>%
+  group_by(Year, tratado) %>%
+  summarise(mean_GDP_growth = mean(GDP_growth, na.rm = TRUE)) %>%
+  mutate(grupo = ifelse(tratado == 1, "Tratamento", "Controlo"))
+
+ ggplot(df_plot, aes(x = Year, y = mean_GDP_growth, color = grupo, group = grupo)) +
+  geom_line(size = 1.2) +
+  geom_vline(xintercept = 2020, linetype = "dashed", color = "black") +
+  labs(title = "Evolução do crescimento do PIB: Tratamento vs Controlo",
+       x = "Ano", y = "Crescimento médio do PIB (%)",
+       color = "Grupo") +
+  theme_minimal()
+
+```
+
+O método Difference-in-Differences baseia-se no pressuposto de que, na
+ausência do tratamento, os grupos de tratamento e controlo teriam
+seguido trajetórias semelhantes do crescimento do PIB ao longo do tempo.
+Para avaliar a plausibilidade deste pressuposto, plotou-se a evolução
+das médias do crescimento do PIB para ambos os grupos no período
+pré-tratamento.
+
+Como ilustrado na Figura 1, observa-se que, antes de 2020, as
+trajetórias do crescimento médio do PIB dos grupos de tratamento e
+controlo são relativamente próximas e apresentam uma evolução paralela,
+especialmente no período imediatamente anterior à pandemia. Embora haja
+alguma oscilação natural nas séries, não se verifica uma divergência
+sistemática entre os grupos antes do tratamento. Após 2020, nota-se uma
+quebra simultânea em ambos os grupos, mas a diferença entre eles não se
+altera de forma abrupta ou fora do padrão histórico.
+
+Estes resultados sugerem que o pressuposto de tendências paralelas é
+plausível nesta aplicação, reforçando a validade do modelo DiD
+utilizado.
+
+#### Conclusão
+
+Este projeto consistiu na análise da relação entre exportações,
+crecimento económico, desigualdade e pobreza entre 2010 e 2023 nos
+países da União Europeia. Tendo em conta as diversas crises económicas
+ao longo desse período, os modelos criados revelaram informações sobre
+como as exportações afetam o desenvolvimento dos países da UE.
+
+O primeiro modelo mostrou que o crescimento das exportações está
+associado a um crecimento positivo crescimento do PIB, reforçando o
+papel das exportações. O modelo 2 revelelou que os anos de crise 2012 e
+2020 reduziram o PIB ressaltando que crises como o COVID-19 provocam
+choques económicos negativos. Por outro lado, o modelo 3, relacionando
+as exportações e crises, indica que o efeito das exportações sobre o PIB
+intensifica-se em tempos de crise. O modelo 4 utilizou o indice de Gini
+e a pobreza como variáveis explicativas. Este modelo transmitiu que um
+aumento na desigualdade provoca uma redução no crescimento do PIB.
+
+Testes de robustez confirmaram a adequação do modelo de efeitos fixos
+para o modelo 4 e Breusch-Pagan e White indicam heterocedasticidade. O
+teste de Chow também revelou uma queda estrutural em 2020 mostrando que
+a pandemia alterou a relação entre as exportações e o crescimento
+económico. AIC e BIC reforçam a capacidade explicativa do modelo 4
+apontando-o como o modelo de melhor ajuste.
+
+Concluindo, esta análise revelou que as exportações são um fator
+extremamente relevante para o crescimento económico da União Europeia
+sendo isto frisado em tempos de crise. No entanto, o comércio
+internacional tem pouco impacto na redução da pobreza e desigualdade que
+poderiam ser mais impactadas se pelo investimento em vários setores como
+a educação.
+
+#### Referências
+
+Frankel, J. A., & Romer, D. H. (1999). Does Trade Cause Growth? American
+Economic Review, 89(3), 379–399.
+
+Crespo-Cuaresma, J., Silgoner, M. A., & Ritzberger-Grünwald, D. (2008).
+Growth, convergence and EU membership. Applied Economics, 40(5),
+643–656.
+
+Helpman, E., Itskhoki, O., & Redding, S. (2010). Trade and Labor Market
+Outcomes. NBER Working Paper, No. 16662. National Bureau of Economic
+Research.
+
+Dollar, D., & Kraay, A. (2001). Trade, Growth, and Poverty. World Bank
+Policy Research Working Paper, No. 2615.
+
+Winters, L. A., McCulloch, N., & McKay, A. (2004). Trade Liberalization
+and Poverty: The Evidence So Far. Journal of Economic Literature, 42(1),
+72–115.
+
+Freeman, R., & Sajedi, R. (2020). Covid-19 Briefing: International Trade
+and Supply Chains. Bank Underground, 11 de junho de 2020.
